@@ -24,10 +24,39 @@
 	});
 
 	/* Thumbnail display functionality */
-
-
-
-
+  let youtubeUrl = '';
+  let thumbnailUrl = '';
+  function handleUrlInput() {
+    const videoId = extractVideoId(youtubeUrl);
+    if (videoId) {
+      thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    } else {
+      thumbnailUrl = ''; // Clear thumbnail if videoId is not valid
+    }
+  }
+  function extractVideoId(url) {
+    try {
+      const urlObj = new URL(url);
+      if (urlObj.hostname === 'www.youtube.com' || urlObj.hostname === 'youtube.com') {
+        if (urlObj.searchParams.has('v')) {
+          return urlObj.searchParams.get('v');
+        } else {
+          throw new Error('Video ID not found in URL');
+        }
+      } else if (urlObj.hostname === 'youtu.be') {
+        return urlObj.pathname.substr(1);
+      } else {
+        throw new Error('Invalid YouTube URL');
+      }
+    } catch (error) {
+      console.error('Error extracting video ID:', error);
+      return null;
+    }
+  }
+  // Optional: Clear thumbnail when the URL input is cleared
+  $: if (youtubeUrl === '') {
+    thumbnailUrl = '';
+  }
 
 	/* Resolution button functionality */
 
@@ -156,17 +185,20 @@
 	  background-color: #f0f0f0;
 	}
 	.preview-container {
-	  position: relative;
-	  width: 600px;
-	  height: 300px;
-	  border: 1px solid #ccc;
-	  padding: 10px;
-	  border-radius: 4px;
-	  background-color: white;
-	  margin-bottom: 20px;
-	  overflow: hidden;
-	  box-sizing: border-box;
-	}
+    position: relative;
+    width: 600px;
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: white;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 	.preview-container img {
 	  max-width: 100%;
 	  max-height: 100%;
@@ -205,7 +237,7 @@
 	  <div class="form-group">
 		<label for="urlInput">Enter YouTube URL:</label>
 		<div class="url-container">
-		  <input type="text" id="urlInput" name="urlInput" placeholder="https://www.youtube.com/watch?v=..." class="url-input">
+			<input type="text" id="urlInput" bind:value={youtubeUrl} on:input={handleUrlInput} placeholder="https://www.youtube.com/watch?v=..." class="url-input">
 		  <button type="button" class="close-button">&#10006;</button>
 		</div>
 	  </div>
@@ -213,7 +245,11 @@
 	  <!-- Preview Container and Label -->
 	  <div class="preview-label">Preview:</div>
 	  <div class="preview-container" id="imagePreview">
-		<span class="watermark">Thumbnail Preview</span>
+		{#if thumbnailUrl}
+		  <img src={thumbnailUrl} alt="Thumbnail Preview" />
+		{:else}
+		  <span class="watermark">Thumbnail Preview</span>
+		{/if}
 	  </div>
   
 	  <!-- Resolution Selection -->
