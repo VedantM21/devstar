@@ -26,12 +26,18 @@
 	/* Thumbnail display functionality */
   let youtubeUrl = '';
   let thumbnailUrl = '';
+  let isValidLink = true;
+
   function handleUrlInput() {
     const videoId = extractVideoId(youtubeUrl);
-    if (videoId) {
+	const validVideoIdPattern = /^[a-zA-Z0-9_-]{11}$/;
+
+    if (videoId && validVideoIdPattern.test(videoId)) {
       thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+	  isValidLink = true;
     } else {
       thumbnailUrl = ''; // Clear thumbnail if videoId is not valid
+	  isValidLink = false;
     }
   }
   function extractVideoId(url) {
@@ -56,6 +62,7 @@
   // Optional: Clear thumbnail when the URL input is cleared
   $: if (youtubeUrl === '') {
     thumbnailUrl = '';
+	isValidLink = true;
   }
 
 	/* Resolution button functionality */
@@ -71,6 +78,16 @@
 
 
 	/* Invalid URL display functionality */
+
+	function validateAndSubmit() {
+		if (!youtubeUrl || !extractVideoId(youtubeUrl)) {
+			isValidLink = false;
+			alert('Please provide a valid YouTube link');
+		} else {
+			handleUrlInput();
+			isValidLink = true;
+		}
+  	}
 
 
 
@@ -220,6 +237,11 @@
 	  justify-content: space-between;
 	  position: relative;
 	} 
+	.invalid-link-message {
+    	color: red;
+    	font-size: 18px;
+    	font-weight: bold;
+  	}
 	.close-button {
 	  background-color: red;
 	  color: white;
@@ -247,6 +269,8 @@
 	  <div class="preview-container" id="imagePreview">
 		{#if thumbnailUrl}
 		  <img src={thumbnailUrl} alt="Thumbnail Preview" />
+		{:else if (!isValidLink && youtubeUrl !== ' ')}
+			<span class="invalid-link-message">Please enter a valid link</span>
 		{:else}
 		  <span class="watermark">Thumbnail Preview</span>
 		{/if}
@@ -266,7 +290,7 @@
   
 	  <!-- Download Button Group -->
 	  <div class="form-group">
-		<button type="button" id="downloadBtn" class="button" disabled>
+		<button type="button" id="downloadBtn" class="button" on:click={validateAndSubmit} disabled>
 		  Download Thumbnail
 		</button>
 	  </div>
