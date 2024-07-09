@@ -1,4 +1,7 @@
 <script>
+	let youtubeUrl = '';
+  	let thumbnailUrl = '';
+  	let isValidLink = true;
 	let dropdownVisible = false;
 	let selectedResolution = 'High'; // Default resolution
   
@@ -25,10 +28,6 @@
 	});
 
 	/* Thumbnail display functionality */
-  let youtubeUrl = '';
-  let thumbnailUrl = '';
-  let isValidLink = true;
-
   function handleUrlInput() {
     const videoId = extractVideoId(youtubeUrl);
 	const validVideoIdPattern = /^[a-zA-Z0-9_-]{11}$/;
