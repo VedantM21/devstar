@@ -1,6 +1,6 @@
 <script>
 	let dropdownVisible = false;
-	let selectedResolution = 'Medium'; // Default resolution
+	let selectedResolution = 'High'; // Default resolution
   
 	// Toggle dropdown visibility
 	function toggleDropdown() {
@@ -10,6 +10,7 @@
 	// Select resolution
 	function selectResolution(resolution) {
 	  selectedResolution = resolution;
+	  updateThumbnail();
 	  dropdownVisible = false; // Hide dropdown after selection
 	  console.log(`Selected resolution: ${resolution}`);
 	}
@@ -66,10 +67,31 @@
   }
 
 	/* Resolution button functionality */
-
-
-
-
+	function updateThumbnail() {
+    if (youtubeUrl) {
+      const videoId = extractVideoId(youtubeUrl);
+      if (videoId) {
+        switch (selectedResolution) {
+          case 'Medium':
+            thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+            break;
+          case 'High':
+            thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            break;
+          case 'Maximum':
+            thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+            break;
+          default:
+            thumbnailUrl = ''; // Clear thumbnail if resolution not recognized
+        }
+      } else {
+        thumbnailUrl = ''; // Clear thumbnail if videoId is not valid
+      }
+    } else {
+      thumbnailUrl = ''; // Clear thumbnail if youtubeUrl is empty
+    }
+    updatePreview(); // Optional: Call a function to update the preview container
+  }
 
 	/* Download button functionality */
 
@@ -77,8 +99,12 @@
 
 
 
-	/* Invalid URL display functionality */
 
+
+
+
+
+	/* Invalid URL display functionality */
 	function validateAndSubmit() {
 		if (!youtubeUrl || !extractVideoId(youtubeUrl)) {
 			isValidLink = false;
@@ -89,11 +115,12 @@
 		}
   	}
 
-
-
-
-
 	/* Close button functionality */
+
+
+
+
+
 
 
 
@@ -270,7 +297,7 @@
 		{#if thumbnailUrl}
 		  <img src={thumbnailUrl} alt="Thumbnail Preview" />
 		{:else if (!isValidLink && youtubeUrl !== ' ')}
-			<span class="invalid-link-message">Please enter a valid link</span>
+			<span class="invalid-link-message">Please provide a valid YouTube link</span>
 		{:else}
 		  <span class="watermark">Thumbnail Preview</span>
 		{/if}

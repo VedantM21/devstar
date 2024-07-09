@@ -314,10 +314,6 @@
         "description": "",
         "contributors": [
             {
-                "name": "Vedant Mayekar",
-                "githubId": "VedantM21"
-            },
-            {
                 "name": "ANKITA MISHRA",
                 "githubId": "ANKITAMISHRA29"
             },
@@ -330,12 +326,12 @@
                 "githubId": "varshini-coder"
             },
             {
-                "name": "",
-                "githubId": ""
+                "name": "ANURAJ VENKATPURWAR",
+                "githubId": "Anuraj4"
             },
             {
-                "name": "",
-                "githubId": ""
+                "name": "VEDANT MAYEKAR",
+                "githubId": "VedantM21"
             }
         ]
     }
