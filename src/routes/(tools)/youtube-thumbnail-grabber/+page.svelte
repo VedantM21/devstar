@@ -4,16 +4,36 @@
   	let isValidLink = true;
 	let dropdownVisible = false;
 	let selectedResolution = 'High'; // Default resolution
+  	let thumbnailUrls = {
+    	Medium: '',
+    	High: '',
+    	Maximum: ''
+  	};
   
 	// Toggle dropdown visibility
 	function toggleDropdown() {
-	  dropdownVisible = !dropdownVisible;
+		const dropdown = document.getElementById('resolutionDropdown');
+		const buttonRect = document.getElementById('resolutionBtn').getBoundingClientRect();
+		const dropdownHeight = dropdown.offsetHeight;
+
+		// Check if there is enough space below the button
+		const spaceBelow = window.innerHeight - buttonRect.bottom;
+
+		if (spaceBelow < dropdownHeight) {
+			// Position the dropdown above the button
+			dropdown.style.top = `-${dropdownHeight + 10}px`;
+		} else {
+			// Position the dropdown below the button
+			dropdown.style.top = 'calc(100% + 10px)';
+		}
+		
+		dropdownVisible = !dropdownVisible;
 	}
   
 	// Select resolution
 	function selectResolution(resolution) {
 	  selectedResolution = resolution;
-	  updateThumbnail();
+	  thumbnailUrl = thumbnailUrls[resolution];
 	  dropdownVisible = false; // Hide dropdown after selection
 	  console.log(`Selected resolution: ${resolution}`);
 	}
@@ -33,10 +53,11 @@
 	const validVideoIdPattern = /^[a-zA-Z0-9_-]{11}$/;
 
     if (videoId && validVideoIdPattern.test(videoId)) {
-      thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-	  isValidLink = true;
+      isValidLink = true;
+      updateThumbnail();
     } else {
-      thumbnailUrl = ''; // Clear thumbnail if videoId is not valid
+      thumbnailUrl = '';
+      thumbnailUrls = { Medium: '', High: '', Maximum: '' };
 	  isValidLink = false;
     }
   }
@@ -62,6 +83,7 @@
   // Optional: Clear thumbnail when the URL input is cleared
   $: if (youtubeUrl === '') {
     thumbnailUrl = '';
+    thumbnailUrls = { Medium: '', High: '', Maximum: '' };
 	isValidLink = true;
   }
 
@@ -70,38 +92,30 @@
     if (youtubeUrl) {
       const videoId = extractVideoId(youtubeUrl);
       if (videoId) {
-        switch (selectedResolution) {
-          case 'Medium':
-            thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-            break;
-          case 'High':
-            thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-            break;
-          case 'Maximum':
-            thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-            break;
-          default:
-            thumbnailUrl = ''; // Clear thumbnail if resolution not recognized
-        }
+        thumbnailUrls = {
+          Medium: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+          High: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+          Maximum: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+        };
+        thumbnailUrl = thumbnailUrls[selectedResolution];
       } else {
-        thumbnailUrl = ''; // Clear thumbnail if videoId is not valid
+        thumbnailUrl = '';
+        thumbnailUrls = { Medium: '', High: '', Maximum: '' };
       }
     } else {
-      thumbnailUrl = ''; // Clear thumbnail if youtubeUrl is empty
+      thumbnailUrl = '';
+      thumbnailUrls = { Medium: '', High: '', Maximum: '' };
     }
-    updatePreview(); // Optional: Call a function to update the preview container
   }
 
 	/* Download button functionality */
-
-
-
-
-
-
-
-
-
+	function downloadThumbnail() {
+	  if (thumbnailUrls[selectedResolution]) {
+		window.open(thumbnailUrls[selectedResolution], '_blank');
+	  } else {
+        alert('No thumbnail available for the selected resolution.');
+      }
+	}
 
 	/* Invalid URL display functionality */
 	function validateAndSubmit() {
@@ -110,21 +124,19 @@
 			alert('Please provide a valid YouTube link');
 		} else {
 			handleUrlInput();
-			isValidLink = true;
+			if (isValidLink) {
+				downloadThumbnail(); // Only download if the link is valid
+			}
 		}
   	}
 
 	/* Close button functionality */
-
-
-
-
-
-
-
-
-
-
+	function clearInput() {
+		youtubeUrl = '';
+		thumbnailUrl = '';
+		thumbnailUrls = { Medium: '', High: '', Maximum: '' };
+		isValidLink = true;
+	}
 </script>
 
 <style>
@@ -286,7 +298,7 @@
 		<label for="urlInput">Enter YouTube URL:</label>
 		<div class="url-container">
 			<input type="text" id="urlInput" bind:value={youtubeUrl} on:input={handleUrlInput} placeholder="https://www.youtube.com/watch?v=..." class="url-input">
-		  <button type="button" class="close-button">&#10006;</button>
+		  <button type="button" class="close-button" on:click={clearInput}>&#10006;</button>
 		</div>
 	  </div>
   
@@ -295,7 +307,7 @@
 	  <div class="preview-container" id="imagePreview">
 		{#if thumbnailUrl}
 		  <img src={thumbnailUrl} alt="Thumbnail Preview" />
-		{:else if (!isValidLink && youtubeUrl !== ' ')}
+		{:else if (!isValidLink && youtubeUrl !== '')}
 			<span class="invalid-link-message">Please provide a valid YouTube link</span>
 		{:else}
 		  <span class="watermark">Thumbnail Preview</span>
@@ -305,8 +317,10 @@
 	  <!-- Resolution Selection -->
 	  <div class="form-group">
 		<div class="resolution-container">
-		  <button id="resolutionBtn" class="button resolution-btn" on:click={toggleDropdown}>Select Resolution: {selectedResolution}</button>
-		  <div id="resolutionDropdown" class="resolution-dropdown" class:visible={dropdownVisible}>
+		  <button id="resolutionBtn" class="button" type="button" on:click={toggleDropdown}>
+			Select Resolution
+		  </button>
+		  <div id="resolutionDropdown" class="resolution-dropdown {dropdownVisible ? 'visible' : ''}">
 			<button type="button" on:click={() => selectResolution('Medium')}>Medium</button>
 			<button type="button" on:click={() => selectResolution('High')}>High</button>
 			<button type="button" on:click={() => selectResolution('Maximum')}>Maximum</button>
@@ -314,11 +328,7 @@
 		</div>
 	  </div>
   
-	  <!-- Download Button Group -->
-	  <div class="form-group">
-		<button type="button" id="downloadBtn" class="button" on:click={validateAndSubmit} disabled>
-		  Download Thumbnail
-		</button>
-	  </div>
+	  <!-- Download Button -->
+	  <button class="button" type="button" on:click={validateAndSubmit}>Download Thumbnail</button>
 	</div>
 </div>
