@@ -8,7 +8,7 @@
     	Medium: '',
     	High: '',
     	Maximum: ''
-  	};
+	};
   
 	// Toggle dropdown visibility
 	function toggleDropdown() {
@@ -32,12 +32,14 @@
   
 	// Select resolution
 	function selectResolution(resolution) {
-	  selectedResolution = resolution;
-	  thumbnailUrl = thumbnailUrls[resolution];
-	  dropdownVisible = false; // Hide dropdown after selection
-	  console.log(`Selected resolution: ${resolution}`);
+  	selectedResolution = resolution;
+ 	updateThumbnail();
+  	dropdownVisible = false;
+  	const resolutionBtn = document.getElementById('resolutionBtn');
+  	resolutionBtn.textContent = `Select Resolution: ${resolution}`;
+  	console.log(`Selected resolution: ${resolution}`);
 	}
-  
+
 	// Close dropdown if clicked outside
 	document.addEventListener('click', function(event) {
 	  const dropdown = document.getElementById('resolutionDropdown');
@@ -48,7 +50,7 @@
 	});
 
 	/* Thumbnail display functionality */
-  function handleUrlInput() {
+  	function handleUrlInput() {
     const videoId = extractVideoId(youtubeUrl);
 	const validVideoIdPattern = /^[a-zA-Z0-9_-]{11}$/;
 
@@ -80,6 +82,7 @@
       return null;
     }
   }
+  
   // Optional: Clear thumbnail when the URL input is cleared
   $: if (youtubeUrl === '') {
     thumbnailUrl = '';
@@ -130,13 +133,6 @@
 		}
   	}
 
-	/* Close button functionality */
-	function clearInput() {
-		youtubeUrl = '';
-		thumbnailUrl = '';
-		thumbnailUrls = { Medium: '', High: '', Maximum: '' };
-		isValidLink = true;
-	}
 </script>
 
 <style>
@@ -222,14 +218,12 @@
 	  padding: 10px;
 	  border-radius: 4px;
 	}
-  
 	.resolution-dropdown.visible {
 	  display: block;
 	}
-  
 	.resolution-dropdown button {
 	  width: 100%;
-	  padding: 10px 20px;
+	  padding: 0;
 	  text-align: left;
 	  background-color: #fff;
 	  border: none;
@@ -240,20 +234,20 @@
 	  background-color: #f0f0f0;
 	}
 	.preview-container {
-    position: relative;
-    width: 600px;
-    height: 300px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: white;
-    margin-bottom: 20px;
-    overflow: hidden;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+   	  position: relative;
+   	  width: 600px;
+   	  height: 300px;
+   	  border: 1px solid #ccc;
+   	  padding: 10px;
+   	  border-radius: 4px;
+   	  background-color: white;
+   	  margin-bottom: 20px;
+   	  overflow: hidden;
+   	  box-sizing: border-box;
+   	  display: flex;
+	  justify-content: center;
+   	  align-items: center;
+  	}
 	.preview-container img {
 	  max-width: 100%;
 	  max-height: 100%;
@@ -276,19 +270,10 @@
 	  position: relative;
 	} 
 	.invalid-link-message {
-    	color: red;
-    	font-size: 18px;
-    	font-weight: bold;
+      color: red;
+      font-size: 18px;
+      font-weight: bold;
   	}
-	.close-button {
-	  background-color: red;
-	  color: white;
-	  border: none;
-	  padding: 5px;
-	  cursor: pointer;
-	  font-size: 14px;
-	  border-radius: 4px;
-	}
 </style>
   
 <div class="card gap-16 items-center mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 overflow-hidden rounded-lg">
@@ -298,7 +283,6 @@
 		<label for="urlInput">Enter YouTube URL:</label>
 		<div class="url-container">
 			<input type="text" id="urlInput" bind:value={youtubeUrl} on:input={handleUrlInput} placeholder="https://www.youtube.com/watch?v=..." class="url-input">
-		  <button type="button" class="close-button" on:click={clearInput}>&#10006;</button>
 		</div>
 	  </div>
   
@@ -318,7 +302,7 @@
 	  <div class="form-group">
 		<div class="resolution-container">
 		  <button id="resolutionBtn" class="button" type="button" on:click={toggleDropdown}>
-			Select Resolution
+			Select Resolution: {selectedResolution}
 		  </button>
 		  <div id="resolutionDropdown" class="resolution-dropdown {dropdownVisible ? 'visible' : ''}">
 			<button type="button" on:click={() => selectResolution('Medium')}>Medium</button>
