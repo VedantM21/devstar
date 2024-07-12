@@ -1,11 +1,21 @@
+<!-- ExamplePage.svelte -->
 <script>
-
-</script>
-
-<div class="card gap-16 items-center mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 overflow-hidden rounded-lg">
-	<!-- Add tool here -->
-</div>
-
-<style>
-
-</style>
+    let resolution = '720p';
+  
+    function changeResolution(newResolution) {
+      resolution = newResolution;
+      // Additional logic can be added here if needed
+    }
+  </script>
+  
+  <style>
+    /* Styles can be added here if needed */
+  </style>
+  
+  <div class="resolution-container">
+    <p>Current Resolution: {resolution}</p>
+    <button on:click={() => changeResolution('720p')}>720p</button>
+    <button on:click={() => changeResolution('1080p')}>1080p</button>
+    <button on:click={() => changeResolution('4k')}>4k</button>
+  </div>
+  
