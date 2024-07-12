@@ -117,9 +117,9 @@
             }
         ]
     },
-    "gradient-generator": {
+    "Gradient-generator": {
         "name": "Gradient Generator",
-        "link": "/gradient-generator",
+        "link": "/Gradient-generator",
         "description": "The Gradient Generator is a tool for Developers which allows you to create Gradient between 2 Colors and Copy its CSS Output.",
         "contributors": [
             {
@@ -305,6 +305,33 @@
             {
                 "name": "Hannan Satopay",
                 "githubId": "hannansatopay"
+            }
+        ]
+    },
+    "youtube-thumbnail-grabber": {
+        "name": "Youtube Thumbnail Grabber",
+        "link": "/youtube-thumbnail-grabber",
+        "description": "The YouTube Thumbnail Grabber is a tool for fetching and downloading thumbnails from YouTube videos based on user-specified resolutions.",
+        "contributors": [
+            {
+                "name": "ANKITA MISHRA",
+                "githubId": "ANKITAMISHRA29"
+            },
+            {
+                "name": "SIDDHARTH MONDAL",
+                "githubId": "Siddharth-coder-droid"
+            },
+            {
+                "name": "VARSHINI",
+                "githubId": "varshini-coder"
+            },
+            {
+                "name": "ANURAJ VENKATPURWAR",
+                "githubId": "Anuraj4"
+            },
+            {
+                "name": "VEDANT MAYEKAR",
+                "githubId": "VedantM21"
             }
         ]
     }
