@@ -1,4 +1,42 @@
 {
+    "Gradient-generator": {
+        "name": "Gradient Generator",
+        "link": "/Gradient-generator",
+        "description": "The Gradient Generator is a tool for Developers which allows you to create Gradient between 2 Colors and Copy its CSS Output.",
+        "contributors": [
+            {
+                "name": "Yash Mankar",
+                "githubId": "AraeneaCLI"
+            }
+        ]
+    },
+    "Text-Statistics": {
+        "name": "Text Statistics",
+        "link": "/Text-Statistics",
+        "description": "The Text Statistics tool is designed to provide comprehensive analysis and insights into a given text. It helps users understand various attributes of their text by calculating and displaying the Total No. of Word count in the Text, The total number of characters in the text, The total number of sentences in the text, The total number of paragraphs in the text, The average length of words in the text, An estimate of the time it would take to read the text, The number of unique words used in the text, A table displaying the count of words based on their length (number of letters). This helps in analyzing the distribution of word lengths within the text.",
+        "contributors": [
+            {
+                "name": "Sujit Sambhaji Lendave",
+                "githubId": "Sujit747"
+            },
+            {
+                "name": "Shubham Karne",
+                "githubId": "shubhamkarne11"
+            },
+            {
+                "name": "Gyan Prakash",
+                "githubId": "gyanp28"
+            },
+            {
+                "name": "Sudhanshu Marudgan",
+                "githubId": "Sudhanshu-Marudgan"
+            },
+            {
+                "name": "Anoushka Ramankulat",
+                "githubId": "Anoushka-Ramankulath"
+            }
+        ]
+    },
     "add-prefix-suffix": {
         "name": "Add Prefix and Suffix",
         "link": "/add-prefix-suffix",
@@ -80,6 +118,22 @@
             }
         ]
     },
+   
+    "bionic-reading-converter": {
+        "name": "Bionic Reading Converter",
+        "link": "/bionic-reading-converter",
+        "description": "Enhances texts so that the most concise parts of words are highlighted.",
+        "contributors": [
+            {
+                "name": "Yash Jain",
+                "githubId": "YashJain999"
+            },
+            {
+                "name": "Shaik Shams Tabrez",
+                "githubId": "shaik-shams-tabrez"
+            }
+        ]
+    },
     "css-animator": {
         "name": "CSS Animator",
         "link": "/css-animator",
@@ -92,6 +146,37 @@
             {
                 "name": "Munsif Satopay",
                 "githubId": "munsifsatopay"
+            }
+        ]
+    },
+    "css-loader-generator": {
+        "name": "",
+        "link": "/css-loader-generator",
+        "description": "",
+        "contributors": [
+            {
+                "name": "ANKITA MISHRA",
+                "githubId": "ANKITAMISHRA29"
+            },
+            {
+                "name": "Prerana Patil",
+                "githubId": "Prerana-Patil1"
+            },
+            {
+                "name": "Juhi Vaidya",
+                "githubId": "juhi1113"
+            },
+            {
+                "name": "Dhyan Patel",
+                "githubId": "dhyanpatel18"
+            },
+            {
+                "name": "Melissa Sequeira",
+                "githubId": "melody2004"
+            },
+            {
+                "name": "Aryan Pange",
+                "githubId": "aryanpange"
             }
         ]
     },
@@ -198,6 +283,33 @@
             }
         ]
     },
+    "Multi-timer": {
+        "name": "Multi Timer (With Alarm)",
+        "link": "/Multi-timer",
+        "description": "Build different times like: Count Up, Count Down, Reminder",
+        "contributors": [
+            {
+                "name": "Ishaan Bhela",
+                "githubId": "Ishaan453"
+            },
+            {
+                "name": "Chirag Dave",
+                "githubId": "chirag132002"
+            },
+            {
+                "name": "Saksham Porwal",
+                "githubId": "Sam9733"
+            },
+            {
+                "name": "Jay Trivedi",
+                "githubId": "Jayu1214"
+            },
+            {
+                "name": "Sameehan Joshi",
+                "githubId": "Sameehan25"
+            }
+        ]
+    },
     "neumorphism-generator": {
         "name": "Neumorphism Generator",
         "link": "/neumorphism-generator",
@@ -265,6 +377,37 @@
             }
         ]
     },
+    "realistic-tweet-generator": {
+        "name": "Realistic Tweet Generator",
+        "link": "/realistic-tweet-generator",
+        "description": "Create realistic mockup tweets with this cutting-edge Tweet Generator. Ideal for pranking your friends, strategizing social media content, interface designing, or studying social impacts, this tool allows you to simulate user handles, tweet content, hashtags, and engagement metrics effortlessly. Enhance your projects with authentic-looking tweets without the need for a Twitter account.",
+        "contributors": [
+            {
+                "name": "ANKITA MISHRA",
+                "githubId": "ANKITAMISHRA29"
+            },
+            {
+                "name": "SAUMAY JAISWAL",
+                "githubId": "saumay3105"
+            },
+            {
+                "name": "ALISHA",
+                "githubId": "itsAlisha"
+            },
+            {
+                "name": "SWASTIKA SONI",
+                "githubId": "SwastikaSoni"
+            },
+            {
+                "name": "PIYUSH KUMAR SAHU",
+                "githubId": "FSD-Piysuh"
+            },
+            {
+                "name": "BIPIN PATIL",
+                "githubId": "bipinpatil12"
+            }
+        ]
+    },
     "robots-txt-generator": {
         "name": "Robots.txt Generator",
         "link": "/robots-txt-generator",
@@ -288,6 +431,49 @@
             {
                 "name": "Hannan Satopay",
                 "githubId": "hannansatopay"
+            }
+        ]
+    },
+    "encryptor-decryptor": {
+        "name": "Text Encryption Decryption Tool",
+        "link": "/encryptor-decryptor",
+        "description": "A Text Encryption Decryption Tool lets you scramble plain text into a coded message and then unscramble it back. These tools are useful for protecting sensitive information you share online.",
+        "contributors": [
+            {
+                "name": "ANKITA MISHRA",
+                "githubId": "ANKITAMISHRA29"
+            },
+            {
+                "name": "Sakshi",
+                "githubId": "Sakshee-24"
+            },
+            {
+                "name": "Navjeet",
+                "githubId": "navjeet-lohan"
+            },
+            {
+                "name": "Swapnil",
+                "githubId": "swapniljoshi123"
+            },
+            {
+                "name": "Ravish",
+                "githubId": "RavishRanjancodes"
+            },
+            {
+                "name": "Kaneez",
+                "githubId": "Kaneezfatima19"
+            },
+            {
+                "name": "Riya",
+                "githubId": "riyasawant193"
+            },
+            {
+                "name": "Ram",
+                "githubId": "ryuk27"
+            },
+            {
+                "name": "Aman",
+                "githubId": "Amvic7"
             }
         ]
     },
@@ -332,6 +518,34 @@
             {
                 "name": "VEDANT MAYEKAR",
                 "githubId": "VedantM21"
+             }
+        ]
+    },
+=======
+    "world-clock": {
+        "name": "World Clock",
+        "link": "/world-clock",
+        "description": "Times of World: showcases time of different countries",
+        "contributors": [
+            {
+                "name": "ILyas Sayyed",
+                "githubId": "MrPorsche"
+            },
+            {
+                "name": "K Vaishnavi",
+                "githubId": "Vaishnnavikothmirkar"
+            },
+            {
+                "name": "Joel Geo Abraham",
+                "githubId": "JoelAbraham16032002"
+            },
+            {
+                "name": "Silla Mariya Roy",
+                "githubId": "Silla03"
+            },
+            {
+                "name": "Kaberi manjari Prusty",
+                "githubId": "coder-kbb"
             }
         ]
     }

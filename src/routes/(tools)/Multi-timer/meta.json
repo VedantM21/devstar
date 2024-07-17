@@ -1,0 +1,24 @@
+{
+    "name": "Multi Timer (With Alarm)",
+    "description":"This app lets you set and save multiple timers with reminders or use a stopwatch to track time. Switch between timer and stopwatch modes, start, stop, reset, and delete timers, and record laps on the stopwatch. Get notified with a message and sound when a timer ends.",
+    "contributors": [{
+        "name": "Ishaan Bhela",
+        "githubId": "Ishaan453"
+    }, 
+    {
+        "name": "Chirag Dave",
+        "githubId": "chirag132002"
+    },
+    {
+        "name": "Saksham Porwal",
+        "githubId": "Sam9733"
+    },
+    {
+        "name": "Jay Trivedi",
+        "githubId": "Jayu1214"
+    },
+    {
+        "name": "Sameehan Joshi",
+        "githubId": "Sameehan25"
+    }]
+}
